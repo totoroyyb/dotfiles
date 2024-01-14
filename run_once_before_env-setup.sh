@@ -22,6 +22,6 @@ function echo_to_conf {
 EDITOR_SETUP_CMD="export EDITOR='vim'"
 PATH_SETUP_CMD="export PATH=$PATH:$HOME/bin/:$HOME/.bin/:$HOME/.local/bin/"
 
-echo_to_conf "$EDITOR_SETUP_CMD" 
-echo_to_conf "$PATH_SETUP_CMD" 
+# echo_to_conf "$EDITOR_SETUP_CMD" 
+# echo_to_conf "$PATH_SETUP_CMD" 
 
