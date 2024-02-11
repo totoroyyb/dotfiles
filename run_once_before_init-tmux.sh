@@ -13,7 +13,7 @@ else
     ln -s -f .tmux/.tmux.conf
     
     # Restart tmux server
-    tmux kill-server > /dev/null 2>&1
+    # tmux kill-server > /dev/null 2>&1
 fi
 
 
