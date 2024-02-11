@@ -115,10 +115,13 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-. "$HOME/.cargo/env"
+
+if [ -f "~/$HOME/.cargo/bin/" ]; then
+    . "$HOME/.cargo/env"
+    source "$HOME/.cargo/env"
+fi
 
 export PATH=$PATH:~/bin/
 export EDITOR="vim"
 
-source /users/ybyan/.cargo/env
 export DISPLAY="localhost:10.0"
