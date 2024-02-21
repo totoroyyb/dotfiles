@@ -116,8 +116,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-if [ -f "~/$HOME/.cargo/bin/" ]; then
-    . "$HOME/.cargo/env"
+if [ -f $HOME/.cargo/env ]; then
     source "$HOME/.cargo/env"
 fi
 
