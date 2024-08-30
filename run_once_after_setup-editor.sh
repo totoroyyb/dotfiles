@@ -53,6 +53,7 @@ rm ripgrep_13.0.0_amd64.deb
 
 # Install fd
 sudo apt-get install fd-find -y
+mkdir -p ~/.local/bin
 ln -s $(which fdfind) ~/.local/bin/fd
 
 # Install LazyVim
