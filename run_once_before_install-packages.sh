@@ -2,6 +2,10 @@
 
 OS=$(uname -s)
 
+# zsh
+sudo apt-get install -y zsh
+chsh -a /bin/zsh
+
 # lazyvim dependencies
 sudo apt-get install -y unzip
 
@@ -14,10 +18,14 @@ DOWNLOAD_FOLDER=/tmp/
 
 # rustup + cargo
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y -q
+# source binary to prepare for the following cargo install
+if [ -f $HOME/.cargo/env ]; then
+  source "$HOME/.cargo/env"
+fi
 
 # fzf
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-~/.fzf/install
+~/.fzf/install --key-bindings --completion --no-update-rc
 
 # delta (diff)
 cargo install -q git-delta
@@ -26,7 +34,7 @@ cargo install -q git-delta
 cargo install -q tlrc
 
 # eza (ls)
-cargo install eza
+cargo install -q eza
 
 # zoxide (cd)
 curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
@@ -43,7 +51,7 @@ if [ "$OS" = "Darwin" ]; then
   # brew install thefuck
 elif [ "$OS" = "Linux" ]; then
   # bat (cat)
-  sudo apt install bat
+  sudo apt install -y bat
   mkdir -p ~/.local/bin
   ln -s /usr/bin/batcat ~/.local/bin/bat
 

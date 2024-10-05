@@ -2,4 +2,4 @@
 require("config.lazy")
 
 -- Enable system clipboard support
-vim.opt.clipboard = "unnamedplus"
+-- vim.opt.clipboard = "unnamedplus"

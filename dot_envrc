@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if [ -f $HOME/.cargo/env ]; then
+  source "$HOME/.cargo/env"
+fi
+
+# chezmoi
+export PATH="$HOME/bin/:$PATH"
+
+# nvim
+export PATH="/opt/nvim-linux64/bin:$PATH"
+
+# fzf
+export PATH="$HOME/.fzf/bin:$PATH"
+
+# bat
+export PATH="$HOME/.local/bin:$PATH"
