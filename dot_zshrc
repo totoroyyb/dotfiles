@@ -5,17 +5,12 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+if [ -f "$HOME/.shellrc" ]; then
+  source $HOME/.shellrc
+fi
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/ybyan/.oh-my-zsh"
-
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+export ZSH="$HOME/.oh-my-zsh"
 
 if type brew &>/dev/null; then
     FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
@@ -88,22 +83,17 @@ fi
 plugins=(
   git 
   sudo 
-  zsh-autosuggestions 
   zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
+  export EDITOR='nvim'
 else
   export EDITOR='vim'
 fi
@@ -119,50 +109,13 @@ fi
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-source ~/powerlevel10k/powerlevel10k.zsh-theme
+source $HOME/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 export PATH="$HOME/.bin:$PATH"
 
-# source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
-
-# source /opt/homebrew/opt/chruby/share/chruby/auto.sh
-
-# chruby ruby-2.7.3
-
-eval "$(nodenv init -)"
-[ -f "/Users/ybyan/.ghcup/env" ] && source "/Users/ybyan/.ghcup/env" # ghcup-env
-export PATH="/opt/homebrew/opt/curl/bin:$PATH"
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/ybyan/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/ybyan/opt/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/ybyan/opt/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/ybyan/opt/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/ybyan/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/ybyan/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/ybyan/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/ybyan/google-cloud-sdk/completion.zsh.inc'; fi
-export PATH=/Users/ybyan/google-cloud-sdk/bin:/opt/homebrew/opt/curl/bin:/Users/ybyan/.nodenv/shims:/Users/ybyan/.bin:/opt/local/bin:/opt/local/sbin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin:/usr/local/go/bin:/usr/local/share/dotnet:/opt/X11/bin:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/ybyan/.gem/bin:/Users/ybyan/google-cloud-sdk/bin:/Users/ybyan/opt/anaconda3/bin:/Users/ybyan/opt/anaconda3/condabin:/opt/homebrew/opt/curl/bin:/Users/ybyan/.nodenv/shims:/Users/ybyan/.bin:/opt/local/bin:/opt/local/sbin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/ybyan/.cargo/bin:/Users/ybyan/.local/bin:/Users/ybyan/.cabal/bin:/Users/ybyan/.ghcup/bin:/Users/ybyan/.cabal/bin:/Users/ybyan/.ghcup/bin:/Users/ybyan/go/bin:/Users/ybyan/go/bin:/Users/ybyan/go/bin
-
-
-
-# GitHub CI Alias Setup
-eval "$(github-copilot-cli alias -- "$0")"
-
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

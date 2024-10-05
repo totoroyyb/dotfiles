@@ -6,9 +6,16 @@ fi
 
 export EDITOR="nvim"
 export DISPLAY="localhost:10.0"
+export DIFFTOOL=delta
 
 # chezmoi
-export PATH=$PATH:$HOME/bin/
+export PATH="$HOME/bin/:$PATH"
 
 # nvim
-export PATH="$PATH:/opt/nvim-linux64/bin"
+export PATH="/opt/nvim-linux64/bin:$PATH"
+
+# fzf
+export PATH="$HOME/.fzf/bin:$PATH"
+
+# bat
+export PATH="$HOME/.local/bin:$PATH"
