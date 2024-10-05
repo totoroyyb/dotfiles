@@ -116,11 +116,4 @@ if ! shopt -oq posix; then
   fi
 fi
 
-if [ -f $HOME/.cargo/env ]; then
-    source "$HOME/.cargo/env"
-fi
-
-export PATH=$PATH:~/bin/
-export EDITOR="vim"
-
-export DISPLAY="localhost:10.0"
+source $HOME/.shellrc

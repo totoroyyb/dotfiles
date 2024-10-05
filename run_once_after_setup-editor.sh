@@ -13,14 +13,14 @@ install_nvim() {
 
   NVIM_BIN="/opt/nvim-linux64/bin"
   export PATH=$NVIM_BIN:$PATH
-  
-  echo "export PATH=\$PATH:$NVIM_BIN" >> "$HOME/.bashrc"
+
+  # echo "export PATH=\$PATH:$NVIM_BIN" >> "$HOME/.bashrc"
 }
 
 # Required version
 nvim_required_version="0.9.0"
 
-if ! command -v nvim &> /dev/null; then
+if ! command -v nvim &>/dev/null; then
   echo "Neovim is not installed."
   # Install NeoVim
   install_nvim
@@ -68,5 +68,4 @@ git clone https://github.com/LazyVim/starter ~/.config/nvim
 rm -rf ~/.config/nvim/.git
 
 export PATH=$HOME/.local/bin:$PATH
-echo "export PATH=\$HOME/.local/bin:\$PATH" >> "$HOME/.bashrc"
-
+# echo "export PATH=\$HOME/.local/bin:\$PATH" >> "$HOME/.bashrc"
