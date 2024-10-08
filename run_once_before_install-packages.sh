@@ -4,7 +4,7 @@ OS=$(uname -s)
 
 # zsh
 sudo apt-get install -y zsh
-chsh -a /bin/zsh
+# chsh -a /bin/zsh
 
 # lazyvim dependencies
 sudo apt-get install -y unzip

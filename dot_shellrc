@@ -28,9 +28,29 @@ if command -v thefuck &>/dev/null; then
   eval $(thefuck --alias fk)
 fi
 
-# ---- Zoxide (better cd) ----
-eval "$(zoxide init zsh)"
-alias cd="z"
+if [[ -n "$BASH_VERSION" ]]; then
+  # ---- Zoxide (better cd) ----
+  eval "$(zoxide init bash)"
+  alias cd="z"
+
+  # iterm2 shell integration
+  test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+
+  # ---- FZF -----
+  [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+elif [[ -n "$ZSH_VERSION" ]]; then
+  # ---- Zoxide (better cd) ----
+  eval "$(zoxide init zsh)"
+  alias cd="z"
+  #
+  # iterm2 shell integration
+  test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+  # ---- FZF -----
+  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+else
+  echo "Unknown shell"
+fi
 
 # ---- Eza (better ls) -----
 alias ls="eza --icons=always"
@@ -39,3 +59,26 @@ alias ls="eza --icons=always"
 IP=$(ip addr show | grep 'inet ' | grep -v '127.0.0.1' | awk '{print $2}' | cut -d'/' -f1 | head -1)
 export iterm2_hostname=$IP
 export ITERM2_SQUELCH_MARK=1
+
+# some additional customization
+# -- Use fd instead of fzf --
+export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
+
+# Use fd (https://github.com/sharkdp/fd) for listing path candidates.
+# - The first argument to the function ($1) is the base path to start traversal
+# - See the source code (completion.{bash,zsh}) for the details.
+_fzf_compgen_path() {
+  fd --hidden --exclude .git . "$1"
+}
+
+# Use fd to generate the list for directory completion
+_fzf_compgen_dir() {
+  fd --type=d --hidden --exclude .git . "$1"
+}
+
+show_file_or_dir_preview="if [ -d {} ]; then eza --tree --color=always {} | head -200; else bat -n --color=always --line-range :500 {}; fi"
+
+export FZF_CTRL_T_OPTS="--preview '$show_file_or_dir_preview'"
+export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"
