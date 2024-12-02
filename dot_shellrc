@@ -53,7 +53,7 @@ else
 fi
 
 # ---- Eza (better ls) -----
-alias ls="eza --icons=always"
+alias ls="eza -g --icons=always"
 
 # iterm2 integration setup
 IP=$(ip addr show | grep 'inet ' | grep -v '127.0.0.1' | awk '{print $2}' | cut -d'/' -f1 | head -1)
