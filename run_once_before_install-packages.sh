@@ -50,6 +50,11 @@ echo "[WORKING] eza"
 cargo install -q eza
 echo "[FINISH] eza"
 
+# zellij
+echo "[WORKING] zellij"
+cargo install -q --locked zellij
+echo "[FINISH] zellij"
+
 # zoxide (cd)
 echo "[WORKING] zoxide"
 curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
