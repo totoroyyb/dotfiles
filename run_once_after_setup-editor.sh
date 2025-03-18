@@ -6,19 +6,25 @@ version_greater_equal() {
 }
 
 install_nvim() {
-  curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
-  sudo rm -rf /opt/nvim
-  sudo tar -C /opt -xzf nvim-linux64.tar.gz
-  rm -f nvim-linux64.tar.gz
+  # curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
+  curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
 
-  NVIM_BIN="/opt/nvim-linux64/bin"
+  sudo rm -rf /opt/nvim
+  # sudo tar -C /opt -xzf nvim-linux64.tar.gz
+  # rm -f nvim-linux64.tar.gz
+  # NVIM_BIN="/opt/nvim-linux64/bin"
+
+  sudo tar -C /opt -xzf nvim-linux-x86_64.tar.gz
+  rm -f nvim-linux-x86_64.tar.gz
+  NVIM_BIN="/opt/nvim-linux-x86_64/bin"
+
   export PATH=$NVIM_BIN:$PATH
 
   # echo "export PATH=\$PATH:$NVIM_BIN" >> "$HOME/.bashrc"
 }
 
 # Required version
-nvim_required_version="0.9.0"
+nvim_required_version="0.10.0"
 
 if ! command -v nvim &>/dev/null; then
   echo "Neovim is not installed."
