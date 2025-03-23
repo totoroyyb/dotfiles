@@ -2,16 +2,18 @@
 
 OS=$(uname -s)
 
-# zsh
-echo "[WORKING] zsh"
-sudo apt-get install -y zsh
-# chsh -a /bin/zsh
-echo "[FINISH] zsh"
+if [ "$OS" = "Linux" ]; then
+  # zsh
+  echo "[WORKING] zsh"
+  sudo apt-get install -y zsh
+  # chsh -a /bin/zsh
+  echo "[FINISH] zsh"
 
-# lazyvim dependencies
-echo "[WORKING] unzip"
-sudo apt-get install -y unzip
-echo "[FINISH] unzip"
+  # lazyvim dependencies
+  echo "[WORKING] unzip"
+  sudo apt-get install -y unzip
+  echo "[FINISH] unzip"
+fi
 
 # # installs nvm (Node Version Manager)
 # curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
@@ -61,9 +63,9 @@ curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh 
 echo "[FINISH] zoxide"
 
 # pyenv
-echo "[WORKING] pyenv"
-curl https://pyenv.run | bash
-echo "[FINISH] pyenv"
+# echo "[WORKING] pyenv"
+# curl https://pyenv.run | bash
+# echo "[FINISH] pyenv"
 
 # uv
 echo "[WORKING] uv"
