@@ -11,15 +11,15 @@
 	name = Yibo Yan
 
 [core]
-    editor = vim
+    editor = $EDITOR
     pager = delta
 
 [diff]
-    tool = delta
     colorMoved = default
+    tool = delta
 
-[difftool "delta"]
-    cmd = delta "$LOCAL" "$REMOTE"
+# [difftool "delta"]
+#     cmd = delta "$LOCAL" "$REMOTE"
 
 [interactive]
     diffFilter = delta --color-only
@@ -27,7 +27,7 @@
 [delta]
     navigate = true    # use n and N to move between diff sections
     line-numbers = true
-    side-by-side = true
+    side-by-side = false
 
     hyperlinks = true
     hyperlinks-file-link-format = "vscode://file/{path}:{line}"
@@ -37,7 +37,7 @@
     # light = true
 
 [merge]
-    conflictstyle = diff3
+    conflictstyle = zdiff3
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f
