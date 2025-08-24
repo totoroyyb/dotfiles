@@ -72,6 +72,11 @@ echo "[WORKING] uv"
 curl -LsSf https://astral.sh/uv/install.sh | sh
 echo "[FINISH] uv"
 
+# zsh fzf-tab completion plugin
+echo "[WORKING] fzf-tab (zsh plugin)"
+git clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab
+echo "[FINISH] fzf-tab (zsh plugin)"
+
 # Install gh
 if [ "$OS" = "Darwin" ]; then
   # bat (cat)

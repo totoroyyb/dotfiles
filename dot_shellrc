@@ -80,6 +80,39 @@ _fzf_compgen_dir() {
 
 show_file_or_dir_preview="if [ -d {} ]; then eza --tree --color=always {} | head -200; else bat -n --color=always --line-range :500 {}; fi"
 
-export FZF_DEFAULT_OPTS="--height 80% --layout=default --border --color=hl:#2dd4bf"
+export FZF_DEFAULT_OPTS="--height 60% --layout=default --border --color=hl:#2dd4bf"
 export FZF_CTRL_T_OPTS="--preview '$show_file_or_dir_preview'"
 export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"
+
+fzf-all-history-widget() {
+  setopt localoptions pipefail
+  local selected
+  selected=$(
+    # tac -- "$HISTFILE" 2>/dev/null \
+    # | sed -E 's/^: [0-9]+:[0-9]+;//' \
+    # | awk '!seen[$0]++' \
+    # | fzf --border --prompt='history ❯ ' --query="$LBUFFER"
+    tac -- "$HISTFILE" 2>/dev/null |
+      sed -E 's/^: [0-9]+:[0-9]+;//' |
+      fzf --prompt='backword: ' --query="$LBUFFER"
+  ) || {
+    zle redisplay
+    return 0
+  }
+
+  # Put selection on the command line
+  LBUFFER=$selected
+  CURSOR=${#LBUFFER}
+  zle redisplay
+}
+
+zle -N fzf-all-history-widget
+bindkey '^r' fzf-all-history-widget # Ctrl-r -> fuzzy search across ALL sessions
+
+# completion using arrow keys (based on history)
+bindkey '^[[A' history-search-backward
+bindkey '^[[B' history-search-forward
+
+# completion using ctrl+p/ctrl+n (based on history)
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward

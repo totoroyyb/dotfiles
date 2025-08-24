@@ -83,18 +83,30 @@ DISABLE_AUTO_UPDATE="true"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-# history setup
+# Command History Setup
+# Behavior:
+#   ctrl+r: reverse (backword) search on all command history across shell sessions.
+#   ctrl+p: only search on history in the current shell session.
+#   ctrl+n: ditto
+# Note: `fzf` hookup is in the `shellrc` file.
 HISTFILE=$HOME/.zhistory
-SAVEHIST=1000
-HISTSIZE=999
-setopt share_history 
+HISTSIZE=5000
+SAVEHIST=5000
+
+# Don't merge other sessions into this session's in-memory list
+unsetopt share_history
+# setopt share_history 
+
+# But do append each command to $HISTFILE immediately,
+# so other sessions (and fzf) see it right away.
+setopt inc_append_history
+setopt extended_history         # timestamps in HISTFILE
 setopt hist_expire_dups_first
 setopt hist_ignore_dups
 setopt hist_verify
-
-# completion using arrow keys (based on history)
-bindkey '^[[A' history-search-backward
-bindkey '^[[B' history-search-forward
+# (nice extras)
+setopt hist_reduce_blanks
+setopt hist_ignore_space
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
@@ -104,6 +116,7 @@ bindkey '^[[B' history-search-forward
 plugins=(
   git 
   sudo 
+  fzf-tab
   zsh-syntax-highlighting
 )
 
@@ -124,29 +137,16 @@ if [ -f "$HOME/.shellrc" ]; then
   source $HOME/.shellrc
 fi
 
-# test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-#
-# # ---- FZF -----
-# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+if [ -d "$HOME/.nvm" ]; then
+  export NVM_DIR="$HOME/.nvm"
+fi
 
-# # -- Use fd instead of fzf --
-# export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
-# export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-# export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
-# 
-# # Use fd (https://github.com/sharkdp/fd) for listing path candidates.
-# # - The first argument to the function ($1) is the base path to start traversal
-# # - See the source code (completion.{bash,zsh}) for the details.
-# _fzf_compgen_path() {
-#   fd --hidden --exclude .git . "$1"
-# }
-# 
-# # Use fd to generate the list for directory completion
-# _fzf_compgen_dir() {
-#   fd --type=d --hidden --exclude .git . "$1"
-# }
-# 
-# show_file_or_dir_preview="if [ -d {} ]; then eza --tree --color=always {} | head -200; else bat -n --color=always --line-range :500 {}; fi"
-# 
-# export FZF_CTRL_T_OPTS="--preview '$show_file_or_dir_preview'"
-# export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"
+if [ -n "$NVM_DIR" ]; then
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+fi
+
+if [ -x "$HOME/.claude/local/claude" ]; then
+  alias claude="$HOME/.claude/local/claude"
+fi
+
