@@ -5,7 +5,7 @@
 keybinds clear-defaults=true {
     locked {
         // bind "Ctrl g" { SwitchToMode "normal"; }
-        bind "Ctrl a" { SwitchToMode "normal"; }
+        // bind "Ctrl a" { SwitchToMode "normal"; }
         bind "Ctrl b" { SwitchToMode "normal"; }
     }
     pane {
@@ -126,32 +126,49 @@ keybinds clear-defaults=true {
         }
     }
     shared_among "normal" "locked" {
-        bind "Alt left" { MoveFocusOrTab "left"; }
-        bind "Alt down" { MoveFocus "down"; }
-        bind "Alt up" { MoveFocus "up"; }
-        bind "Alt right" { MoveFocusOrTab "right"; }
+        bind "Alt left" { MoveFocus "left"; SwitchToMode "locked"; }
+        bind "Alt down" { MoveFocus "down"; SwitchToMode "locked"; }
+        bind "Alt up" { MoveFocus "up"; SwitchToMode "locked"; }
+        bind "Alt right" { MoveFocus "right"; SwitchToMode "locked"; }
         bind "Alt +" { Resize "Increase"; }
         bind "Alt -" { Resize "Decrease"; }
         bind "Alt =" { Resize "Increase"; }
         bind "Alt [" { PreviousSwapLayout; }
         bind "Alt ]" { NextSwapLayout; }
         bind "Alt f" { ToggleFloatingPanes; }
-        bind "Alt h" { MoveFocusOrTab "left"; }
-        bind "Alt i" { MoveTab "left"; }
-        bind "Alt j" { MoveFocus "down"; }
-        bind "Alt k" { MoveFocus "up"; }
-        bind "Alt l" { MoveFocusOrTab "right"; }
         bind "Alt m" { ToggleFocusFullscreen; }
+        // Quick pane management
         bind "Alt n" { NewPane; }
-        bind "Alt o" { MoveTab "right"; }
         bind "Alt x" { CloseFocus; }
+        // Quick tab management
+        bind "Alt t" { NewTab; }
+        bind "Alt w" { CloseTab; }
+        // Quick tab navigation
+        bind "Alt i" { GoToPreviousTab; SwitchToMode "locked"; }
+        bind "Alt o" { GoToNextTab; SwitchToMode "locked"; }
+        // Quick pane navigation
+        bind "Alt h" { MoveFocus "left"; SwitchToMode "locked"; }
+        bind "Alt j" { MoveFocus "down"; SwitchToMode "locked"; }
+        bind "Alt k" { MoveFocus "up"; SwitchToMode "locked"; }
+        bind "Alt l" { MoveFocus "right"; SwitchToMode "locked"; }
+        // Quick Jump to N-th Tab
+        bind "Alt 1" { GoToTab 1; SwitchToMode "locked";}
+        bind "Alt 2" { GoToTab 2; SwitchToMode "locked";}
+        bind "Alt 3" { GoToTab 3; SwitchToMode "locked";}
+        bind "Alt 4" { GoToTab 4; SwitchToMode "locked";}
+        bind "Alt 5" { GoToTab 5; SwitchToMode "locked";}
+        bind "Alt 6" { GoToTab 6; SwitchToMode "locked";}
+        bind "Alt 7" { GoToTab 7; SwitchToMode "locked";}
+        bind "Alt 8" { GoToTab 8; SwitchToMode "locked";}
+        bind "Alt 9" { GoToTab 9; SwitchToMode "locked";}
     }
     shared_among "normal" {
         bind "x" { CloseFocus; SwitchToMode "locked"; }
+        bind "Ctrl c" { SwitchToMode "locked"; }
     }
     shared_except "locked" "renametab" "renamepane" {
         // bind "Ctrl g" { SwitchToMode "locked"; }
-        bind "Ctrl a" { SwitchToMode "locked"; }
+        // bind "Ctrl a" { SwitchToMode "locked"; }
         bind "Ctrl b" { SwitchToMode "locked"; }
         bind "Ctrl q" { Quit; }
     }
@@ -227,7 +244,10 @@ keybinds clear-defaults=true {
 // changing these requires a restart to take effect
 plugins {
     about location="zellij:about"
-    compact-bar location="zellij:compact-bar"
+    // compact-bar location="zellij:compact-bar"
+    compact-bar location="zellij:compact-bar" {
+        tooltip "F1"
+    }
     configuration location="zellij:configuration"
     filepicker location="zellij:strider" {
         cwd "/"
@@ -277,7 +297,7 @@ default_mode "locked"
 // The name of the default layout to load on startup
 // Default: "default"
 // 
-// default_layout "compact"
+default_layout "compact"
  
 // The folder in which Zellij will look for layouts
 // (Requires restart)

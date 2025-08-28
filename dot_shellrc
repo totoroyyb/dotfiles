@@ -88,10 +88,11 @@ fzf-all-history-widget() {
   setopt localoptions pipefail
   local selected
   selected=$(
-    # tac -- "$HISTFILE" 2>/dev/null \
-    # | sed -E 's/^: [0-9]+:[0-9]+;//' \
-    # | awk '!seen[$0]++' \
-    # | fzf --border --prompt='history ❯ ' --query="$LBUFFER"
+    # tac -- "$HISTFILE" 2>/dev/null |
+    #   sed -E 's/^: [0-9]+:[0-9]+;//' |
+    #   awk '!seen[$0]++' |
+    #   tac |
+    #   fzf --prompt='backword: ' --query="$LBUFFER"
     tac -- "$HISTFILE" 2>/dev/null |
       sed -E 's/^: [0-9]+:[0-9]+;//' |
       fzf --prompt='backword: ' --query="$LBUFFER"
@@ -106,8 +107,8 @@ fzf-all-history-widget() {
   zle redisplay
 }
 
-zle -N fzf-all-history-widget
-bindkey '^r' fzf-all-history-widget # Ctrl-r -> fuzzy search across ALL sessions
+# zle -N fzf-all-history-widget
+# bindkey '^r' fzf-all-history-widget # Ctrl-r -> fuzzy search across ALL sessions
 
 # completion using arrow keys (based on history)
 bindkey '^[[A' history-search-backward
