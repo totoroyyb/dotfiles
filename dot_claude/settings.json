@@ -1,0 +1,43 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch",
+      "Bash(ls:*)",
+      "Bash(grep:*)",
+      "Bash(rg:*)",
+      "Bash(find:*)",
+      "Bash(fd:*)",
+      "Bash(cat:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(which:*)",
+      "Bash(where:*)",
+      "Bash(pwd:*)",
+      "Bash(echo:*)",
+      "Bash(printf:*)",
+      "Bash(wc:*)",
+      "Bash(sort:*)",
+      "Bash(uniq:*)",
+      "Bash(awk:*)",
+      "Bash(ps:*)",
+      "Bash(top:*)",
+      "Bash(htop:*)",
+      "Bash(df:*)",
+      "Bash(du:*)",
+      "Bash(free:*)",
+      "Bash(uname:*)",
+      "Bash(whoami:*)",
+      "Bash(id:*)",
+      "Bash(date:*)",
+      "Bash(uptime:*)"
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "printf '\\033[01;32m%s@%s\\033[00m:\\033[01;34m%s\\033[00m\\n%s' \"$(whoami)\" \"$(hostname -s)\" \"$(pwd)\" \"$(ccusage statusline)\"",
+    "padding": 0
+  },
+  "feedbackSurveyState": {
+    "lastShownTime": 1753945632864
+  }
+}
