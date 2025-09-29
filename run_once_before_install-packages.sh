@@ -4,10 +4,10 @@ OS=$(uname -s)
 
 if [ "$OS" = "Linux" ]; then
   # zsh
-  echo "[WORKING] zsh"
-  sudo apt-get install -y zsh
+  # echo "[WORKING] zsh"
+  # sudo apt-get install -y zsh
   # chsh -a /bin/zsh
-  echo "[FINISH] zsh"
+  # echo "[FINISH] zsh"
 
   # lazyvim dependencies
   echo "[WORKING] unzip"
@@ -37,29 +37,45 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install --key-bindings --completion --no-update-rc
 echo "[FINISH] fzf"
 
+# cargo-install for installing rust binaries
+curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
+# ensure .cargo/bin is in the PATH.
+export PATH=$HOME/.cargo/bin:$PATH
+
+# rigrep
+echo "[WORKING] ripgrep"
+cargo binstall ripgrep -y --locked
+echo "[FINISH] ripgrep"
+
+# fd-find
+echo "[WORKING] fd-find"
+cargo binstall fd-find -y --locked
+echo "[FINISH] fd-find"
+
 # delta (diff)
 echo "[WORKING] git-delta"
-cargo install -q git-delta
+cargo binstall git-delta -y --locked
 echo "[FINISH] git-delta"
 
 # tldr
 echo "[WORKING] tldr"
-cargo install -q tlrc
+cargo binstall tldr -y --locked
 echo "[FINISH] tldr"
 
 # eza (ls)
 echo "[WORKING] eza"
-cargo install -q eza
+cargo binstall eza -y --locked
 echo "[FINISH] eza"
 
 # zellij
 echo "[WORKING] zellij"
-cargo install -q --locked zellij
+cargo binstall zellij -y --locked
 echo "[FINISH] zellij"
 
 # zoxide (cd)
 echo "[WORKING] zoxide"
-curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+cargo binstall zoxide -y --locked
+# curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
 echo "[FINISH] zoxide"
 
 # pyenv
@@ -89,9 +105,10 @@ if [ "$OS" = "Darwin" ]; then
 elif [ "$OS" = "Linux" ]; then
   # bat (cat)
   echo "[WORKING] bat"
-  sudo apt install -y bat
-  mkdir -p ~/.local/bin
-  ln -sf /usr/bin/batcat ~/.local/bin/bat
+  cargo binstall bat -y --locked
+  # sudo apt install -y bat
+  # mkdir -p ~/.local/bin
+  # ln -sf /usr/bin/batcat ~/.local/bin/bat
   echo "[WORKING] bat"
 
   # fuck
