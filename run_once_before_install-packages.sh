@@ -59,7 +59,7 @@ echo "[FINISH] git-delta"
 
 # tldr
 echo "[WORKING] tldr"
-cargo binstall tldr -y --locked
+cargo binstall tlrc -y --locked
 echo "[FINISH] tldr"
 
 # eza (ls)
