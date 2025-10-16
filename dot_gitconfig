@@ -13,6 +13,7 @@
 [core]
     editor = $EDITOR
     pager = delta
+	excludesFile = ~/.config/.gitignore
 
 [diff]
     colorMoved = default
