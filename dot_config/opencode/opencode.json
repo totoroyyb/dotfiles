@@ -4,31 +4,103 @@
     "messages_half_page_up": "ctrl+u",
     "messages_half_page_down": "ctrl+d"
   },
+  // "autoupdate": false,
   "formatter": false,
   "permission": {
     "bash": {
+      "*": "ask",
+      "timeout *": "allow",
+      "export *": "allow",
+      "sleep *": "allow",
+      "file *": "allow",
+      "chmod *": "allow",
+      "readelf *": "allow",
+      "objdump *": "allow",
+      "strings *": "allow",
+      "objcopy *": "allow",
+      "gh repo *": "allow",
+      "gh clone *": "allow",
+      "gh search repos *": "allow",
+      "gh search code *": "allow",
       "git push": "ask",
-      "git status": "allow",
-      "git diff": "allow",
+      "git show *": "allow",
+      "git rev-parse *": "allow",
+      "git status *": "allow",
+      "git log *": "allow",
+      "git diff *": "allow",
+      "git commit *": "allow",
+      "git add *": "allow",
+      "mkdir *": "allow",
+      "touch *": "allow",
+      "which *": "allow",
+      "rust-analyzer *": "allow",
+      "rm -f *": "deny",
+      "rm -rf *": "deny",
+      "rm *": "allow",
       "npm run build": "allow",
-      "ls": "allow",
+      "cargo *": "allow",
+      "cargo test *": "allow",
+      "cargo clippy *": "allow",
+      "cargo build *": "allow",
+      "rustup *": "allow",
+      "ls *": "allow",
       "pwd": "allow",
-      "cat": "allow",
-      "grep": "allow",
-      "rg": "allow",
-      "echo": "allow",
-      "find": "allow"
+      "wc *": "allow",
+      "cat *": "allow",
+      "grep *": "allow",
+      "rg *": "allow",
+      "echo *": "allow",
+      "find *": "allow",
+      "dpdk *": "allow",
+      "make *": "allow",
+      "make clean *": "allow",
+      "fd *": "allow",
+      "cd *": "allow",
+      "pip *": "allow",
+      "pip3 *": "allow",
+      "python *": "allow",
+      "python3 *": "allow",
+      "uv *": "allow",
+      "tail *": "allow",
+      "head *": "allow",
+      "true *": "allow",
+      "curl *": "allow",
+      "printf *": "allow",
+      "sed *": "allow",
+      "tr *": "allow",
+      "awk *": "allow",
+      "xargs *": "allow",
+      "lscpu": "allow",
+    },
+    "task": "allow",
+    "webfetch": "allow",
+    "websearch": "allow",
+    "glob": "allow",
+    "list": "allow",
+    "grep": "allow",
+    "codesearch": "allow",
+    "question": "allow",
+    "external_directory": "ask"
+  },
+  "agent": {
+    "build": {
+      "permission": {
+        "edit": "allow"
+      }
     }
   },
   "plugin": [
+    "oh-my-opencode@latest",
     "opencode-antigravity-auth@latest",
-    "oh-my-opencode",
     "opencode-openai-codex-auth",
     "opencode-pty",
-    "@franlol/opencode-md-table-formatter@0.0.3"
+    "@franlol/opencode-md-table-formatter@0.0.3",
   ],
+  "mcp": {
+  },
   "provider": {
     "google": {
+      "name": "Google",
       "models": {
         "antigravity-gemini-3-pro": {
           "name": "Gemini 3 Pro (Antigravity)",
@@ -132,8 +204,8 @@
             }
           }
         },
-        "antigravity-claude-opus-4-5-thinking": {
-          "name": "Claude Opus 4.5 Thinking (Antigravity)",
+        "antigravity-claude-opus-4-6-thinking": {
+          "name": "Claude Opus 4.6 Thinking (Antigravity)",
           "limit": {
             "context": 200000,
             "output": 64000
