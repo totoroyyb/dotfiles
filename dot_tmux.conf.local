@@ -4,6 +4,10 @@
 #         without any warranty.
 #         Copyright 2012— Gregory Pakosz (@gpakosz).
 
+# -- general -------------------------------------------------------------------
+set -g allow-passthrough on
+set -g default-terminal "screen-256color"
+set-option -a terminal-features 'xterm-256color:RGB'
 
 # -- session creation ----------------------------------------------------------
 
