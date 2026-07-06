@@ -1,0 +1,67 @@
+# ~/.config/mise/config.toml  (deployed here by chezmoi)
+#
+# Dev-environment TOOL manifest for a fresh server, managed by mise.
+# On a new machine:  chezmoi apply  ->  mise install
+#
+# SCOPE: binaries & language toolchains only. All *configuration*
+# (shell rc files, lazygit/bat/nvim configs, git config, p10k, tmux) stays
+# with chezmoi elsewhere in this repo -- mise does not touch it.
+#
+# Dev tools resolve to prebuilt binaries (aqua/core), so the old
+# `cargo binstall` compile step is no longer needed.
+#
+# System packages mise can't provide natively (unzip, xclip, and future OS
+# dependencies) come from nixpkgs via the `nix:` backend (jbadeau/mise-nix).
+# The `run_onchange_after_mise-nix-setup.sh` chezmoi script bootstraps Nix + the
+# backend when sudo is available and writes the package list to a script-owned
+# ~/.config/mise/conf.d/nix-system.toml fragment (edit that script to add pkgs).
+# No per-package `sudo apt` anywhere.
+#
+# Still NOT mise's job:
+#   * base system pkgs (tmux, curl, zsh) .... distro package manager
+#   * oh-my-zsh, powerlevel10k, zsh-syntax-highlighting, fzf-tab ... .chezmoiexternal.toml
+#   * gpakosz .tmux framework ............... run_once_before_init-tmux.sh
+
+[settings]
+# The nix:* backend (jbadeau/mise-nix) is a custom plugin backend, which mise
+# gates behind experimental mode.
+experimental = true
+
+[tools]
+# --- language toolchains ---
+rust = "latest"        # rustup + cargo dev toolchain (replaces the rustup.sh bootstrap)
+node = "lts"           # replaces the commented-out `nvm install 20`
+bun = "latest"         # referenced in .zshrc (BUN_INSTALL)
+
+# --- editor & git UX ---
+neovim = "latest"      # was: GitHub release tarball (run_once_after_setup-editor.sh)
+lazygit = "latest"     # was: GitHub release tarball (run_once_after_setup-editor.sh)
+delta = "latest"       # git-delta; DIFFTOOL in .shellrc
+gh = "latest"          # GitHub CLI; authenticate with:  mise run gh-auth
+
+# --- shell / CLI utilities (were `cargo binstall`) ---
+fzf = "latest"         # note: shell integration comes from `fzf --zsh`, not ~/.fzf
+ripgrep = "latest"     # rg
+fd = "latest"          # fd-find
+eza = "latest"         # better ls (aliased in .shellrc)
+zoxide = "latest"      # better cd (init in .shellrc)
+zellij = "latest"      # terminal multiplexer
+bat = "latest"         # better cat (fzf preview in .shellrc)
+tlrc = "latest"        # tldr client
+uv = "latest"          # python package / venv manager
+
+# --- one-time GitHub CLI auth (gh itself is installed as a tool above) ---
+# Replaces the old run_once_before_github-auth.sh (which used sudo apt).
+[tasks.gh-auth]
+description = "Authenticate the GitHub CLI (interactive; no sudo)"
+run = '''
+if ! command -v gh >/dev/null 2>&1; then
+  echo "gh-auth: gh not found -- run 'mise install' first." >&2
+  exit 1
+fi
+if gh auth status >/dev/null 2>&1; then
+  echo "gh already authenticated."
+else
+  gh auth login -p https -w
+fi
+'''

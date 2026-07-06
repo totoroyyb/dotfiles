@@ -1,4 +1,11 @@
 #!/bin/bash
+#
+# DEPRECATED (2026-07-06): dev-tool installation is now handled by mise via
+# ~/.config/mise/config.toml  (chezmoi source: dot_config/mise/config.toml).
+# This file was renamed with a leading dot so chezmoi no longer runs it; kept
+# for reference only. `unzip` is now installed from nixpkgs via the mise nix:
+# backend (see run_onchange_after_mise-nix-setup.sh), and the `fzf-tab` zsh
+# plugin was relocated to .chezmoiexternal.toml.
 
 OS=$(uname -s)
 

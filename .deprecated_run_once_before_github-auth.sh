@@ -1,4 +1,9 @@
 #!/bin/bash
+#
+# DEPRECATED (2026-07-06): gh is now installed by mise (dot_config/mise/config.toml)
+# and authentication moved to the `gh-auth` mise task (no more sudo apt). Run:
+#   mise install && mise run gh-auth
+# Renamed with a leading dot so chezmoi no longer runs it; kept for reference.
 
 OS=$(uname -s)
 

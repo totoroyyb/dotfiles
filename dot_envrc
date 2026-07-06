@@ -3,18 +3,23 @@
 # chezmoi
 export PATH="$HOME/bin/:$PATH"
 
-# nvim
-# export PATH="/opt/nvim-linux64/bin:$PATH"
-export PATH="/opt/nvim-linux-x86_64/bin:$PATH"
-
-# fzf
-export PATH="$HOME/.fzf/bin:$PATH"
-
-# bat
+# user-local binaries (mise itself lives here, plus uv, pipx, etc.)
 export PATH="$HOME/.local/bin:$PATH"
 
-if [ -f $HOME/.cargo/env ]; then
-  source "$HOME/.cargo/env"
+# cargo-installed binaries (the rust toolchain itself is managed by mise)
+if [ -d "$HOME/.cargo/bin" ]; then
+  export PATH="$HOME/.cargo/bin:$PATH"
+fi
+
+# NOTE: nvim, fzf, bat, ripgrep, etc. now come from mise (activated in
+# ~/.shellrc). Their old hard-coded PATH entries (/opt/nvim-*, ~/.fzf/bin)
+# and the rustup ~/.cargo/env sourcing were removed as stale.
+
+# nix (present only after the mise-nix bootstrap installs it)
+if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
+  . "$HOME/.nix-profile/etc/profile.d/nix.sh"
+elif [ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then
+  . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 fi
 
 if [ -f $HOME/.duckdb ]; then

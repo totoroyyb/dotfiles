@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Install xclip for clipboard support
-sudo apt-get update -y
-sudo apt-get install -y xclip
+# System packages (xclip, unzip) are installed via `mise run setup-system`,
+# not here -- see ~/.config/mise/config.toml. This script only bootstraps the
+# gpakosz .tmux config framework.
 
 # Install tmux config
 if [ -d "$HOME/.tmux" ]; then

@@ -1,4 +1,9 @@
 #!/bin/bash
+#
+# DEPRECATED (2026-07-06): neovim and lazygit are now installed by mise via
+# ~/.config/mise/config.toml  (chezmoi source: dot_config/mise/config.toml).
+# This file was renamed with a leading dot so chezmoi no longer runs it; kept
+# for reference only.
 
 # Function to compare versions
 version_greater_equal() {
