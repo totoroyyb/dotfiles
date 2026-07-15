@@ -7,9 +7,9 @@ export PATH="$HOME/bin/:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
 # cargo-installed binaries (the rust toolchain itself is managed by mise)
-if [ -d "$HOME/.cargo/bin" ]; then
-  export PATH="$HOME/.cargo/bin:$PATH"
-fi
+# if [ -d "$HOME/.cargo/bin" ]; then
+#   export PATH="$HOME/.cargo/bin:$PATH"
+# fi
 
 # NOTE: nvim, fzf, bat, ripgrep, etc. now come from mise (activated in
 # ~/.shellrc). Their old hard-coded PATH entries (/opt/nvim-*, ~/.fzf/bin)
