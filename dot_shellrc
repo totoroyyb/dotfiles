@@ -116,10 +116,12 @@ fzf-all-history-widget() {
 # zle -N fzf-all-history-widget
 # bindkey '^r' fzf-all-history-widget # Ctrl-r -> fuzzy search across ALL sessions
 
-# completion using arrow keys (based on history)
-bindkey '^[[A' history-search-backward
-bindkey '^[[B' history-search-forward
+if [[ -n "${ZSH_VERSION:-}" ]]; then
+  # completion using arrow keys (based on history)
+  bindkey '^[[A' history-search-backward
+  bindkey '^[[B' history-search-forward
 
-# completion using ctrl+p/ctrl+n (based on history)
-bindkey '^p' history-search-backward
-bindkey '^n' history-search-forward
+  # completion using ctrl+p/ctrl+n (based on history)
+  bindkey '^p' history-search-backward
+  bindkey '^n' history-search-forward
+fi
